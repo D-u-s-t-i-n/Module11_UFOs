@@ -268,7 +268,8 @@ function updateFilters() {
   if (date) {
     // Apply `filter` to the table data to only keep the
     // rows where the `datetime` value matches the filter value
-    filteredData = filteredData.filter(row => row.datetime === date);
+    //filteredData = filteredData.filter(row => row.datetime === date);
+    //buildTable(filteredData);
   }
 
   // Save the element, value, and id of the filter that was changed
@@ -280,7 +281,8 @@ function updateFilters() {
   let filterNames = ["#datetime", "#city", "#state", "#country", "#shape"];
   let filterName;
   let tmpObject;
-  
+  let singleFilter;
+  window.alert("Debug1");
 
   for (filterName of filterNames)
   {
@@ -288,10 +290,13 @@ function updateFilters() {
     {
         singleFilter = {ID: filterName, Element: d3.select(filterName), Value: d3.select(filterName).property("value")};
         filters.push(singleFilter);
+        //window.alert(singleFilter.ID);
     }
     
   }
-  
+  let count = filters.length;
+  window.alert(filters.length);
+  window.alert("Debug2");
   //let myLinkAnchor = d3.select(".my-link>a");
 //###
   //let filteredData = tableData;
@@ -351,37 +356,87 @@ function updateFilters() {
 }
 
 function filterTable() {
+  // Set the filteredData to the tableData
+  let filteredData = tableData;
+  
+  // Loop through all of the filters and keep any data that
+  // matches the filter values
+  filters.forEach(function(filtera){
+    if(filters[filtera].ID === "#datetime" && filters[filtera].Value)
+    {
+      //window.alert(filtera.ID);
+      filteredData = filteredData.filter(row => row.datetime === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#city")
+    {
+      filteredData = filteredData.filter(row => row.city === filters[filtera].Value);
+      //continue;
+    } 
+    if(filters[filtera].ID === "#state")
+    {
+      filteredData = filteredData.filter(row => row.state === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#country")
+    {
+      filteredData = filteredData.filter(row => row.country === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#shape")
+    {
+      filteredData = filteredData.filter(row => row.shape === filters[filtera].Value);
+      continue;
+    }   
+  });
+ // window.alert("Debug9");
+  // Finally, rebuild the table using the filtered Data
+  buildTable(filteredData);
+}
+
+function filterTableB() {
 
   // Set the filteredData to the tableData
   let filteredData = tableData;
-
+  //window.alert("Debug3");
   // Loop through all of the filters and keep any data that
   // matches the filter values
-  for (var key in filters)
-  {
-    //if (filters.hasOwnProperty("date"))
-    if (key === "date")
+  //filters.forEach(function(filtera){
+    //window.alert(filters[0].ID);
+  for (var filtera in filters){
+    window.alert("Debug4");
+    window.alert(filters[filtera].ID);
+    
+    //if(filtera.ID === "#datetime")
+    if(filters[filtera].ID === "#datetime" && filters[filtera].Value)
     {
-      filteredData = filteredData.filter(row => row.datetime === date);
-    }
-    if (key === "city")
+      //window.alert(filtera.ID);
+      filteredData = filteredData.filter(row => row.datetime === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#city")
     {
-      filteredData = filteredData.filter(row => row.city === city);
-    }
-    if (key === "state")
+      filteredData = filteredData.filter(row => row.city === filters[filtera].Value);
+      //continue;
+    } 
+    if(filters[filtera].ID === "#state")
     {
-      filteredData = filteredData.filter(row => row.state === state);
-    }
-    if (key === "country")
+      filteredData = filteredData.filter(row => row.state === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#country")
     {
-      filteredData = filteredData.filter(row => row.country === country);
-    }
-    if (key === "shape")
+      filteredData = filteredData.filter(row => row.country === filters[filtera].Value);
+      continue;
+    } 
+    if(filters[filtera].ID === "#shape")
     {
-      filteredData = filteredData.filter(row => row.shape === shape);
-    }
+      filteredData = filteredData.filter(row => row.shape === filters[filtera].Value);
+      continue;
+    }   
   }
-
+  //});
+  window.alert("Debug9");
   // Finally, rebuild the table using the filtered Data
   buildTable(filteredData);
 }
@@ -404,10 +459,10 @@ function handleClick() {
 }
 // Attach an event to listen for the form button
 //d3.selectAll("#filter-btn").on("click", handleClick);
-//d3.selectAll("#filter-btn").on("click", updateFilters);
+d3.selectAll("#filter-btn").on("click", updateFilters);
 //d3.selectAll("input").on()
 //d3.selectAll("#filter-btn").on("click", Debug5);
-d3.selectAll("#filter-btn").on("click", Debug5);
+//d3.selectAll("#filter-btn").on("click", Debug5);
 // Build the table when the page loads
 buildTable(tableData);
 
