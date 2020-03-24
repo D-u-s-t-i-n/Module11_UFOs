@@ -5,20 +5,20 @@ The challenge expands the single filter javascript to multi (5) filters.
 
 The project flow is as follows:
 - Initialize
- - The table with the data (from data.js)
- - Event listener button click to call updateFilter
- - Filters object to blank
+  - The table with the data (from data.js)
+  - Event listener button click to call updateFilter
+  - Filters object to blank
 - **updateFilter** function executes when button is clicked
- - Loops through the textfields. If the field is blank, do not add to the filters
- - If field as value, add the fieldname and value to filters object
- - After all fields are checked, **filterTable** function is called
+  - Loops through the textfields. If the field is blank, do not add to the filters
+  - If field as value, add the fieldname and value to filters object
+  - After all fields are checked, **filterTable** function is called
 - **filterTable** function
- - FilteredData equals whole data set
- - Loops through the filter objects
- - Applies filter if the key matches with the element/column to filter
- - After all filters are checked, **buildTable** function is called
+  - FilteredData equals whole data set
+  - Loops through the filter objects
+  - Applies filter if the key matches with the element/column to filter
+  - After all filters are checked, **buildTable** function is called
 - **buildTable** function
- - Accepts filteredData as input and re-populates the table
+  - Accepts filteredData as input and re-populates the table
 
 Through this challenge, the following lessons were learned:
 - Difference between objects and arrays
