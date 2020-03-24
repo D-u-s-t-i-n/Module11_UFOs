@@ -28,3 +28,4 @@ Through this challenge, the following lessons were learned:
 
 Room for (possible) improvement
 - I'm not sure if d3 filters can be stored in object to eliminate the five filter if statements.
+- I may suggest to deploy this html + javascript on a remote server, or a credentials check for a private/secure site
