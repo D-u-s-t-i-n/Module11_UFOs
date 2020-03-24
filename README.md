@@ -7,8 +7,9 @@ The project flow is as follows:
 - Initialize
   - The table with the data (from data.js)
   - Event listener button click to call updateFilter
-  - Filters object to blank
+  - filters object to blank
 - **updateFilter** function executes when button is clicked
+  - Clear the filters object to blank to prevent previous button click filter from interfering
   - Loops through the textfields. If the field is blank, do not add to the filters
   - If field as value, add the fieldname and value to filters object
   - After all fields are checked, **filterTable** function is called
